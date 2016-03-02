@@ -13,7 +13,7 @@ All rights reserved by Capstone Courseware, LLC.
 
   <persistence-unit-metadata>
     <persistence-unit-defaults>
-      <schema>mydb</schema>
+      <schema>snakeapp</schema>
     </persistence-unit-defaults>
   </persistence-unit-metadata>
   

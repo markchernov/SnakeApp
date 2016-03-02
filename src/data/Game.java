@@ -8,40 +8,44 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Games")
+@Table(name = "games")
 
 @NamedQueries({
 
-		@NamedQuery(name = "Event.getLastGame", query = "select g from Game g where g.id = (SELECT MAX(g2.id)from Game g2)"),
-		@NamedQuery(name = "Event.getAllGames", query = "select g from Game g"), })
+		@NamedQuery(name = "Game.getLastGame", query = "select g from Game g where g.gameid = (SELECT MAX(g2.gameid)from Game g2)"),
+		@NamedQuery(name = "Game.getAllGames", query = "select g from Game g"), 
+		@NamedQuery(name = "Game.getAllGamesByPlayer", query = "select g from Game g where g.player = :player")})
 
 public class Game {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gameid")
-	private int id;
-
-	private Player player;
+	private int gameid;
 
 	private Date startdate;
 
-	private Date endtdate;
+	private Date enddate;
+	
+	private int score;
+
+	@ManyToOne
+	@JoinColumn(name = "playerid" )
+	
+	private Player player;
 
 	public Game() {
 	}
 
 	public int getId() {
-		return id;
-	}
-
-	public Player getPlayer() {
-		return player;
+		return gameid;
 	}
 
 	public Date getStartdate() {
@@ -49,15 +53,19 @@ public class Game {
 	}
 
 	public Date getEndtdate() {
-		return endtdate;
+		return enddate;
 	}
 
+	public int getScore() {
+		return score;
+	}
+	
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
 	public void setId(int id) {
-		this.id = id;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
+		this.gameid = id;
 	}
 
 	public void setStartdate(Date startdate) {
@@ -65,7 +73,35 @@ public class Game {
 	}
 
 	public void setEndtdate(Date endtdate) {
-		this.endtdate = endtdate;
+		this.enddate = endtdate;
 	}
+
+	public Date getEnddate() {
+		return enddate;
+	}
+
+	
+
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
+	}
+
+	public int getGameid() {
+		return gameid;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setGameid(int gameid) {
+		this.gameid = gameid;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	
 
 }

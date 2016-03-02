@@ -15,13 +15,13 @@
 
 		<mapping-file>META-INF/orm.xml</mapping-file>
 
-		<class>data.Event</class>
-		
+		<class>data.Game</class>
+		<class>data.Player</class>
 		
 		
 
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/snakeapp" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="root" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

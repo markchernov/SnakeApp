@@ -20,8 +20,10 @@ public class SnakeDAO {
 	public Game getGameById(String gameid) {
 
 		int id = Integer.parseInt(gameid.trim());
+		
+		System.out.println(id);
 
-		Game game = em.find(Game.class, id);
+		Game game = em.find(Game.class,id);
 
 		System.out.println(game);
 
@@ -37,6 +39,17 @@ public class SnakeDAO {
 
 	}
 	
+	public List<Game> getAllGamesByPlayer(String playerid) {
+		
+		int id = Integer.parseInt(playerid.trim());
+		
+		Player player = em.find(Player.class,id);
+
+		List<Game> gamesbyplayer = em.createNamedQuery("Game.getAllGamesByPlayer").setParameter("player", player).getResultList();
+
+		return gamesbyplayer;
+
+	}
 
 	
 
@@ -48,7 +61,7 @@ public class SnakeDAO {
 
 		em.persist(g);
 
-		Game persistedGame = (Game) em.createNamedQuery("Game.getLastGameById").getSingleResult();
+		Game persistedGame = (Game) em.createNamedQuery("Game.getLastGame").getSingleResult();
 
 		return persistedGame;
 
@@ -79,9 +92,15 @@ public class SnakeDAO {
 	}
 	
 	
+	
+	// ----------------------Player methods-----------------------------------------
+	
+	
 	public Player getPlayerById(String playerid) {
 
 		int id = Integer.parseInt(playerid.trim());
+		
+		System.out.println(id);
 
 		Player player = em.find(Player.class, id);
 
@@ -93,7 +112,7 @@ public class SnakeDAO {
 
 	public List<Player> getAllPlayers() {
 
-		List<Player> players = em.createNamedQuery("Player.getAllGames").getResultList();
+		List<Player> players = em.createNamedQuery("Player.getAllPlayers").getResultList();
 
 		return players;
 
@@ -109,7 +128,7 @@ public class SnakeDAO {
 
 		em.persist(p);
 
-		Player persistedPlayer = (Player) em.createNamedQuery("Player.getLastPlayerById").getSingleResult();
+		Player persistedPlayer = (Player) em.createNamedQuery("Player.getLastPlayer").getSingleResult();
 
 		return persistedPlayer;
 

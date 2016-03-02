@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import data.Game;
 import data.Player;
 import data.SnakeDAO;
@@ -44,6 +41,20 @@ public class myController {
 		return allgames;
 	}
 
+	
+	// get all games by player
+
+		@RequestMapping(path = "games/{playerid}", method = RequestMethod.GET)
+
+		public List<Game> getAllGamesByPlayer(@PathVariable("playerid") String playerid) {
+
+			List<Game> allgamesbyplayer = snakeDao.getAllGamesByPlayer(playerid);
+
+			return allgamesbyplayer;
+		}
+	
+	
+	
 	
 
 	// create new game 
