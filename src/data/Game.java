@@ -52,7 +52,7 @@ public class Game {
 		return startdate;
 	}
 
-	public Date getEndtdate() {
+	public Date getEnddate() {
 		return enddate;
 	}
 
@@ -72,20 +72,11 @@ public class Game {
 		this.startdate = startdate;
 	}
 
-	public void setEndtdate(Date endtdate) {
+	public void setEnddate(Date endtdate) {
 		this.enddate = endtdate;
 	}
 
-	public Date getEnddate() {
-		return enddate;
-	}
-
 	
-
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-
 	public int getGameid() {
 		return gameid;
 	}
