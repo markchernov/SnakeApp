@@ -462,6 +462,23 @@ var refreshCountFunction = function() {
 
 	console.log("in clear header");
 
+	removeCountFunction();
+
+	/*
+	 * if (document.getElementById("myHeader")) {
+	 * 
+	 * var myHeader = document.getElementById("myHeader");
+	 * 
+	 * myHeader.parentNode.removeChild(myHeader);
+	 */
+
+	// }
+};
+
+var removeCountFunction = function() {
+
+	console.log("in removeCountFunction");
+
 	if (document.getElementById("myHeader")) {
 
 		var myHeader = document.getElementById("myHeader");
@@ -469,6 +486,7 @@ var refreshCountFunction = function() {
 		myHeader.parentNode.removeChild(myHeader);
 
 	}
+
 };
 
 var clearButtonsFunction = function() {
@@ -573,7 +591,13 @@ var createHomeButton = function() {
 
 };
 
-var goHomeFunction = function() {
+var goHomeFunction = function(e) {
+
+	onClickStopFunction(e);
+
+	onClickClearFunction(e);
+
+	removeCountFunction();
 
 	clearFormsFunction();
 
