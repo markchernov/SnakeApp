@@ -62,6 +62,8 @@ var onClickStopFunction = function(e) {
 
 	clearInterval(intervalId);
 	
+	console.log(game);
+	
 	putNewGameFunction(e);   // function in xrm.js
 
 };
@@ -104,8 +106,6 @@ var onClickStartFunction = function(e) {
 	
 	startGame();
 	
-	
-	createPlayer();
 	createGame();
 	
 	
@@ -145,6 +145,50 @@ var displayInterval = function() {
 	myDiv.appendChild(myHeader);
 
 };
+
+
+//------ DISPLAY CURRENT PLAYER ------------------------------------------
+
+var displayCurrentPlayer = function(player) {
+
+	myPlayerId = document.getElementById("currentplayerid")
+	myPlayerName = document.getElementById("currentplayername")
+
+	console.log("in display current player");
+
+	
+	
+	myPlayerId.innerHTML = player.playerid ;
+	myPlayerName.innerHTML = player.name;
+
+	var myHeader = document.getElementById("header");
+
+	myHeader.appendChild(myPlayerId);
+	myHeader.appendChild(myPlayerName);
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // ------ CLEAR FUNCTIONS -------------------------------------------
 
@@ -274,6 +318,33 @@ var createHomeButton = function() {
 
 };
 
+
+var createSeeAllGamesButton = function() {
+
+	console.log("in see all games button");
+
+	var myGamesButton = document.createElement("button");
+	myGamesButton.innerHTML = "Click To See Games";
+	myGamesButton.setAttribute("id", "myGamesButton");
+
+	var header = document.getElementById("header");
+
+	header.appendChild(myGamesButton);
+
+	myGamesButton.addEventListener("click", getAllGamesFunction);
+
+};
+
+
+
+
+
+
+
+
+
+
+
 var goHomeFunction = function(e) {
 
 	onClickStopFunction(e);
@@ -301,6 +372,8 @@ var initMenuFunction = function() {
 	createGetPlayerForm();
 
 	clearButtonsFunction();
+	
+	createSeeAllGamesButton();
 };
 
 // clear menu when press the home button

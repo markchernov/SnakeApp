@@ -93,6 +93,12 @@ public class Game {
 		this.player = player;
 	}
 
+	@Override
+	public String toString() {
+		return "Game [gameid=" + gameid + ", startdate=" + startdate + ", enddate=" + enddate + ", score=" + score
+				+ ", player=" + player + "]";
+	}
+
 	
 
 }

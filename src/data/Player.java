@@ -46,7 +46,7 @@ public class Player {
 		
 	}
 
-	public int getId() {
+	public int getPlayerid() {
 		return playerid;
 	}
 
@@ -54,7 +54,7 @@ public class Player {
 		return name;
 	}
 
-	public void setId(int id) {
+	public void setPlayerid(int id) {
 		this.playerid = id;
 	}
 
@@ -68,6 +68,13 @@ public class Player {
 
 	public void setGames(Collection<Game> games) {
 		this.games = games;
+	}
+
+	@Override
+	public String toString() {
+		return "Player [playerid=" + playerid + ", name=" + name + ", games=" + games + "]";
 	};
 
+	
+	
 }

@@ -62,6 +62,8 @@ public class myController {
 	@RequestMapping(path = "newgame", method = RequestMethod.PUT)
 
 	public Game createNewGame(@RequestBody Game game) {
+		
+		System.out.println(game);
 
 		Game createdGame = snakeDao.createGame(game);
 

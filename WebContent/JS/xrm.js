@@ -9,26 +9,24 @@ var getOneGameFunction = function(event) {
 
 	var url = "rest/game/" + id; // path to my controller
 
-	xhrMethod(displayList, url); // call HTTP request passing in callback
+	xhrMethod(displayList, url, "GET"); // call HTTP request passing in callback
 	// method and url to
 
 };
 
-var createOneGameFunction = function(event) {
+
+var getAllGamesFunction = function(event) {
 
 	event.preventDefault(); // prevent redirect to another page
 
-	var id = document.gameForm.gameForm.value; // grab id from the text box
+	
 
-	var url = "rest/game/" + id; // path to my controller
+	var url = "rest/games" // path to my controller
 
-	xhrMethod(displayList, url); // call HTTP request passing in callback
+	xhrMethod(displayList, url, "GET"); // call HTTP request passing in callback
 	// method and url to
 
 };
-
-
-
 
 
 var getOnePlayerFunction = function(event) {
@@ -39,10 +37,12 @@ var getOnePlayerFunction = function(event) {
 
 	var url = "rest/player/" + id; // path to my controller
 
-	xhrMethod(displayList, url); // call HTTP request passing in callback
+	xhrMethod(displayList, url, "GET"); // call HTTP request passing in callback
 	// method and url to
 
 };
+
+
 
 var displayList = function(List) {
 
@@ -76,7 +76,7 @@ var displayList = function(List) {
 		for (var j = 0; j < keys.length; j++) {
 			var tdata = document.createElement('td');
 			row.appendChild(tdata);
-			console.log(eventsList[i][keys[j]]);
+		
 			tdata.innerHTML = eventsList[i][keys[j]];
 		}
 
@@ -84,11 +84,14 @@ var displayList = function(List) {
 
 };
 
-var xhrMethod = function(callback, url) {
+var xhrMethod = function(callback, url, method, object) {
 	var xhr = new XMLHttpRequest();
 
-	xhr.open('GET', url);
-	xhr.send();
+	
+	
+	xhr.open(method, url);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(JSON.stringify(object));
 
 	xhr.onreadystatechange = function() {
 		console.log("IN ONREADY");
@@ -170,6 +173,14 @@ var xhrMethod = function(callback, url) {
 
 				else {
 
+					player = response;    //assign response player object to current player
+					
+					displayCurrentPlayer(player);
+					
+					
+					
+					console.log(" returned player ");
+					console.log(player);
 					localArray.push(response);
 					callback(localArray);
 
@@ -221,19 +232,19 @@ var game;
 var player;
 
 
-var createPlayer = function(){
+/*var createPlayer = function(){
 	
 	var newPayer = {playerid: 5,name: "John"};
 
 	player = new Player(newPayer);
 	
 	
-};
+};*/
 
 
 var createGame = function(){
 	
-	var newGame = {startdate: new Date(), player: player};
+	var newGame = {startdate: new Date()};
 
 	game = new Game(newGame);
 	
@@ -242,24 +253,9 @@ var createGame = function(){
 
 
 
-/*var updateGame = function(){
-	
-	
-
-	game.enddate = new Date();
-	game.score = time;
-	
-	console.log(game);
-};*/
-
-
-
-
-
-
 function Player(obj) {
 
-	this.playerid = obj.id;
+	this.playerid = obj.playerid;
 	this.name = obj.name;
 
 	this.toString = function() {
@@ -269,79 +265,36 @@ function Player(obj) {
 
 
 
-var putNewGameFunction = function(event, callback) {
+
+// create new game
+
+var putNewGameFunction = function(event) {
 
 	event.preventDefault();
 
 	console.log(" In create new game")
-	
-	
-	
+		
 	game.enddate = new Date();
 	game.score = time;
 	
+	console.log(player);
+	
+	var localplayerid =  parseInt(document.getElementById("currentplayerid").innerHTML);
+	var localplayername = document.getElementById("currentplayername").innerHTML;
+	
+	
+	var localPlayer = {playerid: localplayerid, name: localplayername};
+	
+	
+	//localPlayer = {playerid: 6, playername: "Nick"};
+	
+	game.player = new Player(localPlayer);
+	
 	console.log(game);
 	
-
-/*	var title = document.createForm.title.value;
-	var description = document.createForm.description.value; // grab
-	// description
-	// from form
-	var amount = document.createForm.amount.value;
-	var category = document.createForm.category.value;
-
-	var newEvent = {};
-
-	newEvent.title = title;
-	newEvent.description = description;
-	newEvent.amount = amount;
-	newEvent.category = category;
-
-	console.log(newEvent);
-*/
-	var xhr = new XMLHttpRequest();
-
-	xhr.open("PUT", "rest/newgame");
-
-	xhr.setRequestHeader("Content-Type", "application/json");
-
-	xhr.send(JSON.stringify(game));
-
-	//clearForms();
-
-	xhr.onreadystatechange = function() {
-
-		if (xhr.readyState === 4) {
-
-			var eventList = [];
-
-			/* var tempEvent = JSON.parse(xhr.responseText); */
-
-			var tempEvent = JSON.parse(xhr.responseText);
-
-			var convertedEvent = convertDate(tempEvent);
-
-			console.log(convertedEvent);
-
-			/*
-			 * var tempDate = tempEvent.eventdate;
-			 * 
-			 * console.log(tempDate);
-			 * 
-			 * var dateObj = new Date(tempDate);
-			 * 
-			 * tempEvent.eventdate = dateObj;
-			 * 
-			 * console.log(tempEvent.eventdate);
-			 */
-
-			eventList.push(convertedEvent);
-
-			displayList(eventList);
-
-		}
-
-	}
+	
+	xhrMethod(displayList, "rest/newgame", "PUT", game);
+	
 
 };
 

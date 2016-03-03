@@ -150,7 +150,7 @@ public class SnakeDAO {
 
 		//em.persist(e);
 
-		int id = p.getId();
+		int id = p.getPlayerid();
 
 		Player persistedPlayer = em.find(Player.class, id);
 
