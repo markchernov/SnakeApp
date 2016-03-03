@@ -6,20 +6,20 @@ window.onload = function() {
 
 var init = function() {
 
-	//document.gameForm.submit.addEventListener("click", getOneGameFunction);
-	//document.playerForm.submit.addEventListener("click", getOnePlayerFunction);
+	// document.gameForm.submit.addEventListener("click", getOneGameFunction);
+	// document.playerForm.submit.addEventListener("click",
+	// getOnePlayerFunction);
 
-	
-    var header = document.getElementById("header");
-	
-	//header.addEventListener("click", initMenuFunction);
-	
+	var header = document.getElementById("header");
+
+	// header.addEventListener("click", initMenuFunction);
+
 	window.addEventListener("keydown", selectMove);
 
 	createStartButton();
 	createMenuButton();
 	createHomeButton();
-	
+
 };
 
 // ------------- STATS FUNCTIONS
@@ -59,11 +59,11 @@ var displayList = function(List) {
 	var table = document.createElement('table');
 	table.setAttribute('id', 'tableList');
 	var tbody = document.createElement('tbody');
-	
+
 	var header = document.getElementById("tableDiv");
 	header.appendChild(table);
-	
-	//document.body.appendChild(table);
+
+	// document.body.appendChild(table);
 	table.appendChild(tbody);
 	for (var i = 0; i <= eventsList.length; i++) {
 		if (i === 0) {
@@ -156,14 +156,14 @@ var xhrMethod = function(callback, url) {
 					// response.player = name;
 
 					response.player = new Player(player); // create a new
-															// player Object
+					// player Object
 
 					response = new Game(game); // create a new game Object
 
 					delete response.id; // delete extra id assigned by Jackson
 
 					delete response.toString; // delete toString property of a
-												// new Game object
+					// new Game object
 
 					console.log(name);
 
@@ -252,13 +252,13 @@ var selectMove = function(e) {
 		snake = document.getElementById("snake");
 
 		moveSnakeUp(snake);
-		
+
 		break;
 	case 40:
 		console.log("Down ");
 
 		snake = document.getElementById("snake");
-		
+
 		moveSnakeDown(snake);
 		break;
 
@@ -279,8 +279,6 @@ var selectMove = function(e) {
 
 };
 
-
-
 var moveSnakeLeft = function(snake) {
 
 	x = x - 50;
@@ -297,8 +295,6 @@ var moveSnakeLeft = function(snake) {
 
 };
 
-
-
 var moveSnakeRight = function(snake) {
 
 	x = x + 50;
@@ -314,7 +310,6 @@ var moveSnakeRight = function(snake) {
 	}
 
 };
-
 
 var moveSnakeDown = function(snake) {
 
@@ -348,442 +343,361 @@ var moveSnakeUp = function(snake) {
 
 };
 
-
 var x = 0;
 
 var y = 0;
 
+// --------------------------------TIMER FUNCTIONS
+// --------------------------------------------------------
 
+// ------ STOP FUNCTIONS ----------------------------------
 
+var createStopButton = function() {
 
+	console.log("in create stop button");
 
+	var myStopButton = document.createElement("button");
+	myStopButton.innerHTML = "Click Me To Stop";
+	myStopButton.setAttribute("id", "myStopButton");
 
+	var header = document.getElementById("header");
+	header.appendChild(myStopButton);
+	// document.body.appendChild(myStopButton);
 
+	myStopButton.addEventListener("click", onClickStopFunction);
 
-
-
-//--------------------------------TIMER FUNCTIONS --------------------------------------------------------
-
-
-
-//------   STOP  FUNCTIONS   ----------------------------------
-
-
-
-var createStopButton = function()  {
-    
-   console.log("in create stop button");
-    
-   var myStopButton = document.createElement("button");
-   myStopButton.innerHTML = "Click Me To Stop";
-   myStopButton.setAttribute("id", "myStopButton");
- 
-   var header = document.getElementById("header");
-   header.appendChild(myStopButton);
-   //document.body.appendChild(myStopButton);
-
-
-   myStopButton.addEventListener("click", onClickStopFunction);
-    
- 
 };
 
+var onClickStopFunction = function(e) {
 
-var onClickStopFunction = function(e)  {
-    
-  e.preventDefault();
-    
-  console.log("in onClickStopFunction");  
-    
-  clearButton();
-    
-  createStartButton();
-    
-  createClearButton(); 
-    
-  //clearH1();
-    
-  clearInterval(intervalId);
-    
-        
-  
+	e.preventDefault();
+
+	console.log("in onClickStopFunction");
+
+	clearButtonsFunction();
+
+	createStartButton();
+
+	createClearButton();
+
+	// clearH1();
+
+	clearInterval(intervalId);
+
 };
 
+// ------ START FUNCTIONS ----------------------------------------------
 
+var createStartButton = function() {
 
-// ------   START  FUNCTIONS  ----------------------------------------------
+	console.log("in create start button");
 
+	var myStartButton = document.createElement("button");
+	myStartButton.innerHTML = "Click Me To Start";
+	myStartButton.setAttribute("id", "myStartButton");
 
-var createStartButton = function()  {
-    
-   console.log("in create start button");
-    
-   var myStartButton = document.createElement("button");
-   myStartButton.innerHTML = "Click Me To Start";
-   myStartButton.setAttribute("id", "myStartButton");
-     
-   var header = document.getElementById("header");
-   
-   //document.body.appendChild(myStartButton);
-    
-    header.appendChild(myStartButton);
- 
-    myStartButton.addEventListener("click", onClickStartFunction);
-    
-   
+	var header = document.getElementById("header");
+
+	// document.body.appendChild(myStartButton);
+
+	header.appendChild(myStartButton);
+
+	myStartButton.addEventListener("click", onClickStartFunction);
+
 };
 
+// onclick of a start button
 
+var onClickStartFunction = function(e) {
 
+	e.preventDefault();
 
+	clearButtonsFunction(); // clear a start button
 
+	createStopButton();
 
-//  onclick of a start button
+	startInterval();
 
-var onClickStartFunction = function(e)  {
-    
-    e.preventDefault();
-    
-    
-    clearButton();   //  clear a start button
-    
-    createStopButton();  
-    
-    
-    
-    startInterval();    
-    
-    displayInterval();    
-    
-    //createClearButton();
-    
-    console.log("clicked");
+	displayInterval();
+
+	// createClearButton();
+
+	console.log("clicked");
 };
-
-
-
-
-
-
-
-
-
-
-
 
 var startInterval = function() {
-    
-    var myButton = document.getElementById("click");
-    
-    
-     intervalId = setInterval(displayInterval, 1000);
-    
-    
-    
-    
+
+	var myButton = document.getElementById("click");
+
+	intervalId = setInterval(displayInterval, 1000);
+
 };
 
+// ------ DISPLAY FUNCTIONS ------------------------------------------
 
+var displayInterval = function() {
 
+	refreshCountFunction();
 
+	console.log("in display interval");
 
+	var myHeader = document.createElement("h1");
+	myHeader.setAttribute("id", "myHeader");
 
+	console.log(myHeader);
 
+	myHeader.innerHTML = "Count:" + time++;
 
+	var myDiv = document.getElementById("myDiv");
 
+	myDiv.appendChild(myHeader);
 
-// ------   DISPLAY  FUNCTIONS    ------------------------------------------
-
-
-var displayInterval = function()  {
-    
-    
-     
-    
-    refreshCountFunction();
-    
-    console.log("in display interval");
-    
-    var myHeader = document.createElement("h1");
-    myHeader.setAttribute("id", "myHeader");
-    
-    console.log(myHeader);
-    
-    myHeader.innerHTML = "Count:" + time++;
-    
-    
-    
-    var myDiv = document.getElementById("myDiv");
-    
-    myDiv.appendChild(myHeader);
-
-   
-    
 };
 
-// ------   CLEAR  FUNCTIONS -------------------------------------------
-
+// ------ CLEAR FUNCTIONS -------------------------------------------
 
 var time = 0;
 
+var refreshCountFunction = function() {
 
+	console.log("in clear header");
 
+	if (document.getElementById("myHeader")) {
 
+		var myHeader = document.getElementById("myHeader");
 
+		myHeader.parentNode.removeChild(myHeader);
 
-var refreshCountFunction = function ()  {
-    
-    console.log("in clear header");
-    
-    if (document.getElementById("myHeader")){
-    
-    var myHeader = document.getElementById("myHeader");
-    
-    myHeader.parentNode.removeChild(myHeader);
-    
-        }
+	}
 };
 
+var clearButtonsFunction = function() {
 
-var clearButton = function() {
+	console.log("in clear button function");
 
-  console.log("in clear button function");
-    
-    if(document.getElementById("myStopButton"))  {
+	if (document.getElementById("myStopButton")) {
 
-  var myButton = document.getElementById("myStopButton");
-    
-  console.log(myButton);
+		var myButton = document.getElementById("myStopButton");
 
-    
-    myButton.parentNode.removeChild(myButton);
-  
+		console.log(myButton);
 
-        
-        
-    }
-    
-    if(document.getElementById("myStartButton"))  {
+		myButton.parentNode.removeChild(myButton);
 
-  var myButton = document.getElementById("myStartButton");
-    
-  console.log(myButton);
-    
+	}
 
-    
-    
-    myButton.parentNode.removeChild(myButton);
-  
+	if (document.getElementById("myStartButton")) {
 
-        
-        
-    }
-    
-    if(document.getElementById("myClearButton"))  {
+		var myButton = document.getElementById("myStartButton");
 
-  var myButton = document.getElementById("myClearButton");
-    
-  console.log(myButton);
-    
+		console.log(myButton);
 
-    
-    
-    myButton.parentNode.removeChild(myButton);
-  
+		myButton.parentNode.removeChild(myButton);
 
-        
-        
-    }
-    
-    
+	}
+
+	if (document.getElementById("myClearButton")) {
+
+		var myButton = document.getElementById("myClearButton");
+
+		console.log(myButton);
+
+		myButton.parentNode.removeChild(myButton);
+
+	}
+
 };
 
+var createClearButton = function() {
 
-var createClearButton = function()  {
-    
-   console.log("in create clear button");
-    
-     
-   if(!document.getElementById("myClearButton"))  {
-    
-    
-   var myClearButton = document.createElement("button");
-   myClearButton.innerHTML = "Click Me To Clear";
-   myClearButton.setAttribute("id", "myClearButton");
-     
-   var header = document.getElementById("header");
-   header.appendChild(myClearButton);
-   
-   //document.body.appendChild(myClearButton);
+	console.log("in create clear button");
 
+	if (!document.getElementById("myClearButton")) {
 
-   myClearButton.addEventListener("click", onClickClearFunction);
-    
-   }
+		var myClearButton = document.createElement("button");
+		myClearButton.innerHTML = "Click Me To Clear";
+		myClearButton.setAttribute("id", "myClearButton");
+
+		var header = document.getElementById("header");
+		header.appendChild(myClearButton);
+
+		// document.body.appendChild(myClearButton);
+
+		myClearButton.addEventListener("click", onClickClearFunction);
+
+	}
 };
 
+var onClickClearFunction = function(e) {
 
-var onClickClearFunction = function(e)  {
-    
-  e.preventDefault();
-    
-  console.log("in onClickClearFunction");  
-    
-  time = 0;
-    
-   
-  displayInterval();
+	e.preventDefault();
 
-   
+	console.log("in onClickClearFunction");
+
+	time = 0;
+
+	displayInterval();
+
 };
 
+// ------ MENU FUNCTIONS ----------------------------------
 
+var createMenuButton = function() {
 
-//------   MENU  FUNCTIONS   ----------------------------------
+	console.log("in create menu button");
 
+	var myMenuButton = document.createElement("button");
+	myMenuButton.innerHTML = "Click Me To See Menu";
+	myMenuButton.setAttribute("id", "myMenuButton");
 
-var createMenuButton = function()  {
-    
-	   console.log("in create menu button");
-	    
-	   var myMenuButton = document.createElement("button");
-	   myMenuButton.innerHTML = "Click Me To See Menu";
-	   myMenuButton.setAttribute("id", "myMenuButton");
-	     
-	   var header = document.getElementById("header");
-	   
-	   
-	    
-	    header.appendChild(myMenuButton);
-	 
-	    myMenuButton.addEventListener("click", initMenuFunction);
-	    
-	   
-	};
+	var header = document.getElementById("header");
 
-	var createHomeButton = function()  {
-	    
-		   console.log("in create home button");
-		    
-		   var myHomeButton = document.createElement("button");
-		   myHomeButton.innerHTML = "Click To Go Home";
-		   myHomeButton.setAttribute("id", "myHomeButton");
-		     
-		   var header = document.getElementById("header");
-		   
-		   
-		    
-		    header.appendChild(myHomeButton);
-		 
-		    myHomeButton.addEventListener("click", goHomeFunction);
-		    
-		   
-		};
+	header.appendChild(myMenuButton);
 
+	myMenuButton.addEventListener("click", initMenuFunction);
 
+};
 
-var goHomeFunction = function()  {
-			
-			
+var createHomeButton = function() {
+
+	console.log("in create home button");
+
+	var myHomeButton = document.createElement("button");
+	myHomeButton.innerHTML = "Click To Go Home";
+	myHomeButton.setAttribute("id", "myHomeButton");
+
+	var header = document.getElementById("header");
+
+	header.appendChild(myHomeButton);
+
+	myHomeButton.addEventListener("click", goHomeFunction);
+
+};
+
+var goHomeFunction = function() {
+
+	clearFormsFunction();
+
+	clearButtonsFunction();
+
+	clearHomeButton();
+
 	init();
-	
-	clearMenuFunction();
-	
-		};
 
-
-
-
-var initMenuFunction = function()  {
-	
-	createGetGameForm();
-	
-	createGetPlayerForm();
 };
 
+var initMenuFunction = function() {
 
+	createGetGameForm();
 
+	createGetPlayerForm();
 
-var createGetGameForm = function()  {
-    
-	   console.log("in create get game form");
-	    
-	   var gameForm = document.createElement("form");
-    
-       gameForm.setAttribute("name", "gameForm");
-    
-       var inputBox = document.createElement("input");
-    
-       inputBox.setAttribute("name", "gameForm");
-       inputBox.setAttribute("type", "text");
-       inputBox.setAttribute("placeholder", "Type Game ID#");
-    
-       var inputButton = document.createElement("input");
-    
-       inputButton.setAttribute("name", "submit");
-       inputButton.setAttribute("type", "submit");
-       inputButton.setAttribute("value", "Get Game by ID#");
-    	 
-	   var header = document.getElementById("header");
-	   header.appendChild(gameForm);
-	   gameForm.appendChild(inputBox);
-       gameForm.appendChild(inputButton);
-     
+	clearButtonsFunction();
+};
 
-	   gameForm.submit.addEventListener("click", getOneGameFunction);
-	    
-	 
-	};
+// clear menu when press the home button
 
+var clearFormsFunction = function() {
 
+	if (document.getElementById("gameForm")) {
 
-      var createGetPlayerForm = function()  {
-    
-	   console.log("in create get player form");
-	    
-	   var playerForm = document.createElement("form");
-    
-       playerForm.setAttribute("name", "playerForm");
-    
-       var inputBox = document.createElement("input");
-    
-       inputBox.setAttribute("name", "playerForm");
-       inputBox.setAttribute("type", "text");
-       inputBox.setAttribute("placeholder", "Type Player ID#");
-    
-       var inputButton = document.createElement("input");
-    
-       inputButton.setAttribute("name", "submit");
-       inputButton.setAttribute("type", "submit");
-       inputButton.setAttribute("value", "Get Player by ID#");
-    	 
-	   var header = document.getElementById("header");
-	   header.appendChild(playerForm);
-	   playerForm.appendChild(inputBox);
-       playerForm.appendChild(inputButton);
-     
+		var myForm = document.getElementById("gameForm");
 
-	   playerForm.submit.addEventListener("click", getOnePlayerFunction);
-	    
-	 
-	};
+		console.log(myForm);
 
+		myForm.parentNode.removeChild(myForm);
 
+	}
 
+	if (document.getElementById("playerForm")) {
 
+		var myForm = document.getElementById("playerForm");
 
+		console.log(myForm);
 
+		myForm.parentNode.removeChild(myForm);
 
+	}
 
+};
 
+var clearHomeButton = function() {
 
+	if (document.getElementById("myHomeButton")) {
 
+		var myButton = document.getElementById("myHomeButton");
 
+		console.log(myButton);
 
+		myButton.parentNode.removeChild(myButton);
 
+	}
 
+	if (document.getElementById("myMenuButton")) {
 
+		var myButton = document.getElementById("myMenuButton");
 
+		console.log(myButton);
 
+		myButton.parentNode.removeChild(myButton);
 
+	}
 
+};
+
+var createGetGameForm = function() {
+
+	console.log("in create get game form");
+
+	var gameForm = document.createElement("form");
+
+	gameForm.setAttribute("name", "gameForm");
+	gameForm.setAttribute("id", "gameForm");
+	var inputBox = document.createElement("input");
+
+	inputBox.setAttribute("name", "gameForm");
+	inputBox.setAttribute("type", "text");
+	inputBox.setAttribute("placeholder", "Type Game ID#");
+
+	var inputButton = document.createElement("input");
+
+	inputButton.setAttribute("name", "submit");
+	inputButton.setAttribute("type", "submit");
+	inputButton.setAttribute("value", "Get Game by ID#");
+
+	var header = document.getElementById("header");
+	header.appendChild(gameForm);
+	gameForm.appendChild(inputBox);
+	gameForm.appendChild(inputButton);
+
+	gameForm.submit.addEventListener("click", getOneGameFunction);
+
+};
+
+var createGetPlayerForm = function() {
+
+	console.log("in create get player form");
+
+	var playerForm = document.createElement("form");
+
+	playerForm.setAttribute("name", "playerForm");
+	playerForm.setAttribute("id", "playerForm");
+	var inputBox = document.createElement("input");
+
+	inputBox.setAttribute("name", "playerForm");
+	inputBox.setAttribute("type", "text");
+	inputBox.setAttribute("placeholder", "Type Player ID#");
+
+	var inputButton = document.createElement("input");
+
+	inputButton.setAttribute("name", "submit");
+	inputButton.setAttribute("type", "submit");
+	inputButton.setAttribute("value", "Get Player by ID#");
+
+	var header = document.getElementById("header");
+	header.appendChild(playerForm);
+	playerForm.appendChild(inputBox);
+	playerForm.appendChild(inputButton);
+
+	playerForm.submit.addEventListener("click", getOnePlayerFunction);
+
+};
