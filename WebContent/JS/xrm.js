@@ -1,5 +1,4 @@
 // ------------- STATS FUNCTIONS
-// -----------------------------------------------------
 
 var getOneGameFunction = function(event) {
 
@@ -40,6 +39,7 @@ var getOnePlayerFunction = function(event) {
 	xhrMethod(displayList, url, "GET"); // call HTTP request passing in callback
 	// method and url to
 
+	
 };
 
 
@@ -175,6 +175,8 @@ var xhrMethod = function(callback, url, method, object) {
 
 					player = response;    //assign response player object to current player
 					
+					
+					
 					displayCurrentPlayer(player);
 					
 					
@@ -182,8 +184,9 @@ var xhrMethod = function(callback, url, method, object) {
 					console.log(" returned player ");
 					console.log(player);
 					localArray.push(response);
-					callback(localArray);
-
+					//callback(localArray);   //  not calling call back this time cause I don't want to see a table
+					
+					
 				}
 			}
 
@@ -232,16 +235,6 @@ var game;
 var player;
 
 
-/*var createPlayer = function(){
-	
-	var newPayer = {playerid: 5,name: "John"};
-
-	player = new Player(newPayer);
-	
-	
-};*/
-
-
 var createGame = function(){
 	
 	var newGame = {startdate: new Date()};
@@ -286,7 +279,7 @@ var putNewGameFunction = function(event) {
 	var localPlayer = {playerid: localplayerid, name: localplayername};
 	
 	
-	//localPlayer = {playerid: 6, playername: "Nick"};
+	
 	
 	game.player = new Player(localPlayer);
 	

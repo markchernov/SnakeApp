@@ -7,28 +7,16 @@ window.onload = function() {
 };
 
 var init = function() {
-	
+
 	window.addEventListener("keydown", selectMove);
 
-	createStartButton();
 	createMenuButton();
-	createHomeButton();
-	
+
 };
 
+// ------ MENU FUNCTIONS ----------------------------------
 
-
-
-
-
-
-
-
-
-// --------------------------------TIMER FUNCTIONS
-// --------------------------------------------------------
-
-// ------ STOP FUNCTIONS ----------------------------------
+// STOP
 
 var createStopButton = function() {
 
@@ -46,29 +34,35 @@ var createStopButton = function() {
 
 };
 
+// onclick of a stop button
+
 var onClickStopFunction = function(e) {
 
 	e.preventDefault();
 
 	console.log("in onClickStopFunction");
 
-	clearButtonsFunction();
+	// clearButtonsFunction();
 
-	createStartButton();
+	// createStartButton();
 
-	createClearButton();
+	// createClearButton();
 
 	// clearH1();
 
 	clearInterval(intervalId);
+
+	if(game) {
 	
 	console.log(game);
-	
-	putNewGameFunction(e);   // function in xrm.js
 
+	putNewGameFunction(e); // function in xrm.js
+
+	}
+	
 };
 
-// ------ START FUNCTIONS ----------------------------------------------
+// START
 
 var createStartButton = function() {
 
@@ -94,28 +88,28 @@ var onClickStartFunction = function(e) {
 
 	e.preventDefault();
 
-	clearButtonsFunction(); // clear a start button
+	// clearButtonsFunction(); // clear a start button
 
-	createStopButton();
+	// createStopButton();
 
 	startInterval();
 
 	displayInterval();
 
 	// createClearButton();
-	
+
 	startGame();
-	
+
 	createGame();
-	
-	
-	
-	
 
 	console.log("clicked");
 };
 
-var intervalId; 
+// ------ DISPLAY FUNCTIONS ------------------------------------------
+
+// INTERVAL
+
+var intervalId;
 
 var startInterval = function() {
 
@@ -124,8 +118,6 @@ var startInterval = function() {
 	intervalId = setInterval(displayInterval, 1000);
 
 };
-
-// ------ DISPLAY FUNCTIONS ------------------------------------------
 
 var displayInterval = function() {
 
@@ -146,8 +138,7 @@ var displayInterval = function() {
 
 };
 
-
-//------ DISPLAY CURRENT PLAYER ------------------------------------------
+// ------ DISPLAY CURRENT PLAYER ------------------------------------------
 
 var displayCurrentPlayer = function(player) {
 
@@ -156,9 +147,7 @@ var displayCurrentPlayer = function(player) {
 
 	console.log("in display current player");
 
-	
-	
-	myPlayerId.innerHTML = player.playerid ;
+	myPlayerId.innerHTML = player.playerid;
 	myPlayerName.innerHTML = player.name;
 
 	var myHeader = document.getElementById("header");
@@ -167,28 +156,6 @@ var displayCurrentPlayer = function(player) {
 	myHeader.appendChild(myPlayerName);
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // ------ CLEAR FUNCTIONS -------------------------------------------
 
@@ -250,6 +217,39 @@ var clearButtonsFunction = function() {
 
 	}
 
+	if (document.getElementById("myHomeButton")) {
+
+		var myButton = document.getElementById("myHomeButton");
+
+		console.log(myButton);
+
+		myButton.parentNode.removeChild(myButton);
+
+	}
+
+	if (document.getElementById("myMenuButton")) {
+
+		var myButton = document.getElementById("myMenuButton");
+
+		console.log(myButton);
+
+		myButton.parentNode.removeChild(myButton);
+
+	}
+
+	
+	
+	if (document.getElementById("myGamesButton")) {
+
+		var myButton = document.getElementById("myGamesButton");
+
+		console.log(myButton);
+
+		myButton.parentNode.removeChild(myButton);
+
+	}
+	
+	
 };
 
 var createClearButton = function() {
@@ -284,8 +284,6 @@ var onClickClearFunction = function(e) {
 
 };
 
-// ------ MENU FUNCTIONS ----------------------------------
-
 var createMenuButton = function() {
 
 	console.log("in create menu button");
@@ -318,7 +316,6 @@ var createHomeButton = function() {
 
 };
 
-
 var createSeeAllGamesButton = function() {
 
 	console.log("in see all games button");
@@ -335,16 +332,6 @@ var createSeeAllGamesButton = function() {
 
 };
 
-
-
-
-
-
-
-
-
-
-
 var goHomeFunction = function(e) {
 
 	onClickStopFunction(e);
@@ -357,9 +344,7 @@ var goHomeFunction = function(e) {
 
 	clearButtonsFunction();
 
-	clearHomeButton();
-	
-	// TODO   clearTableFunction();
+	clearTableFunction();
 
 	init();
 
@@ -367,74 +352,29 @@ var goHomeFunction = function(e) {
 
 var initMenuFunction = function() {
 
+	clearButtonsFunction(); // clear a start button
+
+	createHomeButton();
+
+	createStartButton();
+
+	createStopButton();
+
+	createClearButton();
+
+	createSeeAllGamesButton();
+
 	createGetGameForm();
 
 	createGetPlayerForm();
-
-	clearButtonsFunction();
 	
-	createSeeAllGamesButton();
-};
-
-// clear menu when press the home button
-
-var clearFormsFunction = function() {
-
-	if (document.getElementById("gameForm")) {
-
-		var myForm = document.getElementById("gameForm");
-
-		console.log(myForm);
-
-		myForm.parentNode.removeChild(myForm);
-
-	}
-
-	if (document.getElementById("playerForm")) {
-
-		var myForm = document.getElementById("playerForm");
-
-		console.log(myForm);
-
-		myForm.parentNode.removeChild(myForm);
-
-	}
+	createChoosePlayerForm();
 
 };
 
-var clearHomeButton = function() {
-
-	if (document.getElementById("myHomeButton")) {
-
-		var myButton = document.getElementById("myHomeButton");
-
-		console.log(myButton);
-
-		myButton.parentNode.removeChild(myButton);
-
-	}
-
-	if (document.getElementById("myMenuButton")) {
-
-		var myButton = document.getElementById("myMenuButton");
-
-		console.log(myButton);
-
-		myButton.parentNode.removeChild(myButton);
-
-	}
-
-};
-
-
-
-
-
-
+// FORMS
 
 var createGetGameForm = function() {
-
-	console.log("in create get game form");
 
 	var gameForm = document.createElement("form");
 
@@ -479,15 +419,66 @@ var createGetPlayerForm = function() {
 
 	inputButton.setAttribute("name", "submit");
 	inputButton.setAttribute("type", "submit");
-	inputButton.setAttribute("value", "Get Player by ID#");
+	inputButton.setAttribute("value", "Choose Player by ID#");
 
 	var header = document.getElementById("header");
 	header.appendChild(playerForm);
 	playerForm.appendChild(inputBox);
 	playerForm.appendChild(inputButton);
 
-	playerForm.submit.addEventListener("click", getOnePlayerFunction);
-
+	playerForm.submit.addEventListener("click", getOnePlayerFunction);	
+	
 };
 
 
+
+// clear menu when press the home button
+
+var clearFormsFunction = function() {
+
+	if (document.getElementById("gameForm")) {
+
+		var myForm = document.getElementById("gameForm");
+
+		console.log(myForm);
+
+		myForm.parentNode.removeChild(myForm);
+
+	}
+
+	if (document.getElementById("playerForm")) {
+
+		var myForm = document.getElementById("playerForm");
+
+		console.log(myForm);
+
+		myForm.parentNode.removeChild(myForm);
+
+	}
+	
+	if (document.getElementById("chooseForm")) {
+
+		var myForm = document.getElementById("chooseForm");
+
+		console.log(myForm);
+
+		myForm.parentNode.removeChild(myForm);
+
+	}
+
+
+};
+
+var clearTableFunction = function() {
+
+	while (document.getElementById("tableList")) {
+
+		var myList = document.getElementById("tableList");
+
+		console.log(myList);
+
+		myList.parentNode.removeChild(myList);
+
+	}
+
+};
