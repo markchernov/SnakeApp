@@ -33,7 +33,7 @@ public class SnakeDAO {
 
 	public List<Game> getAllGames() {
 
-		List<Game> games = em.createNamedQuery("Game.getAllGames").getResultList();
+		List<Game> games = em.createNamedQuery("Game.getAllGames").setMaxResults(10).getResultList();
 
 		return games;
 
@@ -45,7 +45,7 @@ public class SnakeDAO {
 		
 		Player player = em.find(Player.class,id);
 
-		List<Game> gamesbyplayer = em.createNamedQuery("Game.getAllGamesByPlayer").setParameter("player", player).getResultList();
+		List<Game> gamesbyplayer = em.createNamedQuery("Game.getAllGamesByPlayer").setParameter("player", player).setMaxResults(10).getResultList();
 
 		return gamesbyplayer;
 

@@ -28,6 +28,20 @@ var getAllGamesFunction = function(event) {
 };
 
 
+
+var getGamesByPlayerFunction = function(event) {
+	
+	
+	event.preventDefault();
+	
+	var id = document.gamesByPlayerForm.gamesByPlayerForm.value; // grab id from the text box
+	
+	var url = "rest/games/" + id;
+	
+	xhrMethod(displayList, url, "GET");
+}
+
+
 var getOnePlayerFunction = function(event) {
 
 	event.preventDefault(); // prevent redirect to another page
@@ -230,6 +244,7 @@ function Game(obj) {
 
 
 var game;
+
 var player;
 
 
@@ -261,14 +276,19 @@ function Player(obj) {
 
 var putNewGameFunction = function(event) {
 
+	if(event) {
+	
+	
 	event.preventDefault();
 
+    }
 	console.log(" In create new game")
 		
 	game.enddate = new Date();
 	game.score = time;
 	
 	console.log(player);
+	
 	
 	var localplayerid =  parseInt(document.getElementById("currentplayerid").innerHTML);
 	var localplayername = document.getElementById("currentplayername").innerHTML;

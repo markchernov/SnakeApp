@@ -6,73 +6,41 @@
 <title>Snake App</title>
 
 
-<link rel="stylesheet" type="text/css" href="CSS/snake.css" /> 
+<link rel="stylesheet" type="text/css" href="CSS/snake.css" />
 
 </head>
 
-<body id = "body">
+<body id="body">
 
-    <header class="header" id = "header">
+	<header class="header" id="header">
 
 
 		<h1>Snake Game</h1>
+
+		<h2 id="currentplayerid"></h2>
+		<h2 id="currentplayername"></h2>
+		<div id="myDiv"></div>
+
+	</header>
+
+
+
+	<div id="tableDiv"></div>
+
+
+	<canvas id="area" class="gameboard"></canvas>
+
+
+	<script type="text/javascript" src="JS/canvas.js">
 		
-		<h2 id = "currentplayerid"></h2>
-	    <h2 id = "currentplayername"></h2>
+	</script>
+	<script type="text/javascript" src="JS/logic.js">
+		
+	</script>
+	<script type="text/javascript" src="JS/xrm.js">
+		
+	</script>
 
-
-   <div id = "myDiv">    </div>
-
-
-
-    <!-- <br>
-
-	<form name="gameForm" class="game">
-
-		<input name="gameForm" type="text" placeholder="Type Game Id"></input><br>
-
-
-		<br> <input name="submit" type="submit" value="Get Game by ID #"></input>
-
-	</form>
-
-	<br>
-
-
-
-    <form name="playerForm" class="game">
-
-		<input name="playerForm" type="text" placeholder="Type Player Id"></input><br>
-
-
-		<br> <input name="submit" type="submit" value="Get Player by ID #"></input>
-
-	</form>
-
-	<br> -->
-    
-
-    </header>
-
-
-
-    <div id = "tableDiv">      </div>
-    
-  
-    
-    
-
-   <!--  <div id ="snake"> <img src = "https://lh3.googleusercontent.com/-jb18Hy_QdN4/AAAAAAAAAAI/AAAAAAAAAdY/LMBW5UOsoig/photo.jpg"  height = "200" width="200"></div> -->
-    
-    
-    <canvas id="area" class ="gameboard"></canvas>
-    
-    
-    
-	<script type="text/javascript" src="JS/canvas.js"> </script>
-	<script type="text/javascript" src="JS/logic.js"> </script>
-	<script type="text/javascript" src="JS/xrm.js"> </script>
-	
 </body>
 
 

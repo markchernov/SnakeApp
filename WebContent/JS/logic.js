@@ -47,12 +47,22 @@ var createStopButton = function() {
 // onclick of a stop button
 
 var onClickStopFunction = function(e) {
+	
+	
+	console.log("in onClickStopFunction");
+	
+	if(e){
 
 	e.preventDefault();
+	
+	}
 
-	console.log("in onClickStopFunction");
+	
 
 	clearInterval(intervalId);
+	
+	
+	console.log(game);
 
 	if(game) {
 	
@@ -61,6 +71,10 @@ var onClickStopFunction = function(e) {
 	putNewGameFunction(e); // function in xrm.js
 
 	}
+	
+	console.log("before call myGameArea.stop()")
+	
+	myGameArea.stop();  // call method from canvas.js to stop the game
 	
 };
 
@@ -87,16 +101,22 @@ var createStartButton = function() {
 // onclick of a start button
 
 var onClickStartFunction = function(e) {
+	
+	if(e) {
 
 	e.preventDefault();
 
+     }
+	
 	startInterval();
 
 	displayInterval();
 	
-	startGame();
+	
 
-	createGame();
+	createGame(); // create temporary game to update and persist later on
+	
+	MyGameArea.startGame();  // start game from canvas.js
 
 };
 
@@ -280,6 +300,8 @@ var onClickClearFunction = function(e) {
 	removeCountFunction();
 
 	displayInterval();
+	
+	clearCanvasFunction();
 
 };
 
@@ -370,6 +392,8 @@ var initMenuFunction = function() {
 	createSeeAllGamesButton();
 
 	createGetGameForm();
+	
+	createGetGamesByPlayerForm();
 
 	createGetPlayerForm();
 	
@@ -390,6 +414,34 @@ var initMenuFunction = function() {
 
 // FORMS
 
+var createGetGamesByPlayerForm = function() {
+
+	var gameForm = document.createElement("form");
+
+	gameForm.setAttribute("name", "gamesByPlayerForm");
+	gameForm.setAttribute("id", "gamesByPlayerForm");
+	var inputBox = document.createElement("input");
+
+	inputBox.setAttribute("name", "gamesByPlayerForm");
+	inputBox.setAttribute("type", "text");
+	inputBox.setAttribute("placeholder", "Type Player ID#");
+
+	var inputButton = document.createElement("input");
+
+	inputButton.setAttribute("name", "submit");
+	inputButton.setAttribute("type", "submit");
+	inputButton.setAttribute("value", "Games by Player ID#");
+
+	var header = document.getElementById("header");
+	header.appendChild(gameForm);
+	gameForm.appendChild(inputBox);
+	gameForm.appendChild(inputButton);
+
+	gameForm.submit.addEventListener("click", getGamesByPlayerFunction);
+
+};
+
+
 var createGetGameForm = function() {
 
 	var gameForm = document.createElement("form");
@@ -406,7 +458,7 @@ var createGetGameForm = function() {
 
 	inputButton.setAttribute("name", "submit");
 	inputButton.setAttribute("type", "submit");
-	inputButton.setAttribute("value", "Get Game by ID#");
+	inputButton.setAttribute("value", "Display Game by ID#");
 
 	var header = document.getElementById("header");
 	header.appendChild(gameForm);
@@ -416,6 +468,19 @@ var createGetGameForm = function() {
 	gameForm.submit.addEventListener("click", getOneGameFunction);
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var createGetPlayerForm = function() {
 
@@ -472,9 +537,9 @@ var clearFormsFunction = function() {
 
 	}
 	
-	if (document.getElementById("chooseForm")) {
+	if (document.getElementById("gamesByPlayerForm")) {
 
-		var myForm = document.getElementById("chooseForm");
+		var myForm = document.getElementById("gamesByPlayerForm");
 
 		console.log(myForm);
 
@@ -483,6 +548,10 @@ var clearFormsFunction = function() {
 	}
 
 
+	
+	
+	
+	
 };
 
 var clearTableFunction = function() {
@@ -500,3 +569,19 @@ var clearTableFunction = function() {
 	}
 
 };
+
+
+var clearCanvasFunction = function() {
+
+	console.log("clearTableFunction");
+	
+	if (document.getElementById("area")) {
+
+		var myList = document.getElementById("area");
+
+		console.log(myList);
+
+		myList.parentNode.removeChild(myList);
+
+	}};
+
