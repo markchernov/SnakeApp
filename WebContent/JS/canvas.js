@@ -1,6 +1,48 @@
 //------ CANVAS FUNCTIONS -------------------------------------------
 
-// Move Controls
+
+// --------Game Objects
+
+var myGamePiece = new component(30, 30, "red", 10, 10);;
+
+var myFood = [];
+
+var myObstacles = [];
+
+var myObstacles2 = [];
+
+var myGameArea = {
+		canvas : document.getElementById("area"),
+		start : function() {
+			this.canvas.width = 800;
+			this.canvas.height = 800;
+			this.context = this.canvas.getContext("2d");
+			this.frameNo = 0;
+
+			this.interval = setInterval(updateGameArea, 20);
+		},
+		clear : function() {
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		},
+
+		stop : function() {
+			clearInterval(this.interval);
+		}
+
+	};
+
+
+
+function startGame() {
+
+myGameArea.start();
+
+
+}
+
+
+
+// ---------------------------  Move Controls
 
 var selectMove = function(e) {
 
@@ -52,48 +94,7 @@ var selectMove = function(e) {
 
 };
 
-// Game Objects
 
-var myGamePiece;
-
-
-var myFood;
-
-var myObstacles2 = [];
-
-var myObstacles = [];
-
-function startGame() {
-	myGameArea.start();
-
-	myGamePiece = new component(30, 30, "red", 10, 10);
-
-	myFood = new component(20, 20, "green", 300, 120);
-
-}
-
-var myGameArea = {
-	canvas : document.getElementById("area"),
-	start : function() {
-		this.canvas.width = 800;
-		this.canvas.height = 800;
-		this.context = this.canvas.getContext("2d");
-		// document.body.insertBefore(this.canvas,
-		// document.body.childNodes[0]);
-
-		this.frameNo = 0;
-
-		this.interval = setInterval(updateGameArea, 20);
-	},
-	clear : function() {
-		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-	},
-
-	stop : function() {
-		clearInterval(this.interval);
-	}
-
-};
 
 function everyinterval(n) {
 	if ((myGameArea.frameNo / n) % 1 == 0) {
@@ -101,6 +102,11 @@ function everyinterval(n) {
 	}
 	return false;
 }
+
+
+
+//---------------------------  Component Constructor
+
 
 function component(width, height, color, x, y) {
 	this.width = width;
@@ -147,6 +153,11 @@ function component(width, height, color, x, y) {
 
 };
 
+
+//---------------------------  Game Logic
+
+
+
 function updateGameArea() {
 
 	var x, height, gap, minHeight, maxHeight, minGap, maxGap;
@@ -159,7 +170,7 @@ function updateGameArea() {
 			onClickStopFunction(); // call stop function from xrm to persist
 			// the score
 			
-			//myGameArea.stop();
+			//myGameArea.stop();  above function call this one
 
 			
 
@@ -183,13 +194,15 @@ function updateGameArea() {
 		}
 	}
 	
-	if (myGamePiece.crashWith(myFood)) {
+	for (t = 0; t < myFood.length; t += 1) {
+		if (myGamePiece.crashWith(myFood[t])) {
 
+			time = time + 5;
+			
+			myFood[t].width = 0;
+			myFood[t].height = 0;
 
-		time = time + 5;
-		
-      
-	
+		}
 	}
 	
 	
@@ -208,15 +221,18 @@ function updateGameArea() {
 		maxGap = 200;
 		gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
 
-		myObstacles.push(new component(10, height, "green", x, 0));
-		myObstacles.push(new component(10, x - height - gap, "green", x, height
-				+ gap));
+		myObstacles.push(new component(10, height, "brown", x, 0));
+		myObstacles.push(new component(10, x - height - gap, "brown", x, height + gap));
 
 		myObstacles2.push(new component(10, height, "yellow", x, 0));
-		myObstacles2.push(new component(10, x - height - gap, "yellow", x,
-				height + gap));
+		myObstacles2.push(new component(10, x - height - gap, "yellow", x, height + gap));
+		
+		
+		myFood.push(new component(20, 20, "green", x, Math.floor(Math.random() * myGameArea.canvas.height)));
+		//myFood.push(new component(10, x - height - gap, "green", x, height + gap));		
 
 	}
+	
 	for (i = 0; i < myObstacles.length; i += 1) {
 		myObstacles[i].x += -1;
 		myObstacles[i].update();
@@ -227,11 +243,11 @@ function updateGameArea() {
 		myObstacles2[y].update();
 	}
 	
+	for (t = 0; t < myFood.length; t += 1) {
+		myFood[t].x += -5;
+		myFood[t].update();
+	}
 	
-	myFood.x += -3;
-	myFood.update();
-	
-
 	myGamePiece.update();
 };
 

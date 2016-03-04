@@ -287,7 +287,7 @@ var putNewGameFunction = function(event) {
 	game.enddate = new Date();
 	game.score = time;
 	
-	console.log(player);
+	
 	
 	
 	var localplayerid =  parseInt(document.getElementById("currentplayerid").innerHTML);
@@ -300,6 +300,8 @@ var putNewGameFunction = function(event) {
 	
 	
 	game.player = new Player(localPlayer);
+	
+	
 	
 	console.log(game);
 	

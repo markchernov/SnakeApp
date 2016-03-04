@@ -18,10 +18,6 @@ var init = function(e) {
 	
 	//onClickStopFunction(e);
 
-	
-
-	
-
 };
 
 // ------ MENU FUNCTIONS ----------------------------------
@@ -72,10 +68,19 @@ var onClickStopFunction = function(e) {
 
 	}
 	
-	console.log("before call myGameArea.stop()")
+	console.log("before call myGameArea.stop()");
 	
 	myGameArea.stop();  // call method from canvas.js to stop the game
 	
+	/*if (document.getElementById("myStartButton")) {
+
+		var myButton = document.getElementById("myStartButton");
+
+		console.log(myButton);
+
+		myButton.parentNode.removeChild(myButton);
+
+	}*/	
 };
 
 // START
@@ -108,15 +113,33 @@ var onClickStartFunction = function(e) {
 
      }
 	
+	
+	//clearCanvasFunction();
+	
+	clearTableFunction();
+	
+	
+	/*if(myGameArea) {                // if game area already exist clear it
+		
+		
+	myGameArea.clear();
+	
+	}*/
+	
+	/*if(context){
+		
+	clearCanvasFunction();
+		
+		
+	}*/
+	
 	startInterval();
 
 	displayInterval();
 	
+	createGame(); // create temporary game object to update and persist later on
 	
-
-	createGame(); // create temporary game to update and persist later on
-	
-	MyGameArea.startGame();  // start game from canvas.js
+	startGame();  // start game from canvas.js
 
 };
 
@@ -307,8 +330,6 @@ var onClickClearFunction = function(e) {
 
 var createMenuButton = function() {
 
-	
-
 	var myMenuButton = document.createElement("button");
 	myMenuButton.innerHTML = "Click Me To See Menu";
 	myMenuButton.setAttribute("id", "myMenuButton");
@@ -323,8 +344,6 @@ var createMenuButton = function() {
 
 var createHomeButton = function() {
 
-	
-
 	var myHomeButton = document.createElement("button");
 	myHomeButton.innerHTML = "Click To Go Home";
 	myHomeButton.setAttribute("id", "myHomeButton");
@@ -336,8 +355,6 @@ var createHomeButton = function() {
 
 	//myHomeButton.addEventListener("click", goHomeFunction);
 	
-	
-
 };
 
 var createSeeAllGamesButton = function() {
@@ -407,9 +424,6 @@ var initMenuFunction = function() {
 		myButton.parentNode.removeChild(myButton);
 
 	}
-	
-	
-
 };
 
 // FORMS
@@ -546,10 +560,6 @@ var clearFormsFunction = function() {
 		myForm.parentNode.removeChild(myForm);
 
 	}
-
-
-	
-	
 	
 	
 };
@@ -583,5 +593,6 @@ var clearCanvasFunction = function() {
 
 		myList.parentNode.removeChild(myList);
 
-	}};
+	}
+};
 
