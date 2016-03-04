@@ -161,9 +161,7 @@ var xhrMethod = function(callback, url, method, object) {
 					delete response.toString; // delete toString property of a
 					// new Game object
 
-					console.log(name);
-
-					localArray.push(convertDate(response));
+                    localArray.push(convertDate(response));
 
 					console.log(localArray);
 					console.log("my events above this");

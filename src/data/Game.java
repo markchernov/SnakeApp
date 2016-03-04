@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @NamedQueries({
 
 		@NamedQuery(name = "Game.getLastGame", query = "select g from Game g where g.gameid = (SELECT MAX(g2.gameid)from Game g2)"),
-		@NamedQuery(name = "Game.getAllGames", query = "select g from Game g"), 
+		@NamedQuery(name = "Game.getAllGames", query = "select g from Game g order by g.score desc"), 
 		@NamedQuery(name = "Game.getAllGamesByPlayer", query = "select g from Game g where g.player = :player")})
 
 public class Game {

@@ -1,16 +1,26 @@
 // ----------------------------------- GAME FUNCTIONS -------------------------------------------------------------------------------------
 
-window.onload = function() {
+window.onload = function(e) {
 
-	init(); // onload call init methods
+	init(e); // onload call init methods
 
 };
 
-var init = function() {
+var init = function(e) {
+	
+	console.log(e);
 
 	window.addEventListener("keydown", selectMove);
-
+	
 	createMenuButton();
+	
+	//onClickClearFunction(e);
+	
+	//onClickStopFunction(e);
+
+	
+
+	
 
 };
 
@@ -41,14 +51,6 @@ var onClickStopFunction = function(e) {
 	e.preventDefault();
 
 	console.log("in onClickStopFunction");
-
-	// clearButtonsFunction();
-
-	// createStartButton();
-
-	// createClearButton();
-
-	// clearH1();
 
 	clearInterval(intervalId);
 
@@ -88,21 +90,14 @@ var onClickStartFunction = function(e) {
 
 	e.preventDefault();
 
-	// clearButtonsFunction(); // clear a start button
-
-	// createStopButton();
-
 	startInterval();
 
 	displayInterval();
-
-	// createClearButton();
-
+	
 	startGame();
 
 	createGame();
 
-	console.log("clicked");
 };
 
 // ------ DISPLAY FUNCTIONS ------------------------------------------
@@ -279,6 +274,10 @@ var onClickClearFunction = function(e) {
 	console.log("in onClickClearFunction");
 
 	time = 0;
+	
+	clearTableFunction();
+
+	removeCountFunction();
 
 	displayInterval();
 
@@ -286,7 +285,7 @@ var onClickClearFunction = function(e) {
 
 var createMenuButton = function() {
 
-	console.log("in create menu button");
+	
 
 	var myMenuButton = document.createElement("button");
 	myMenuButton.innerHTML = "Click Me To See Menu";
@@ -302,23 +301,26 @@ var createMenuButton = function() {
 
 var createHomeButton = function() {
 
-	console.log("in create home button");
+	
 
 	var myHomeButton = document.createElement("button");
 	myHomeButton.innerHTML = "Click To Go Home";
 	myHomeButton.setAttribute("id", "myHomeButton");
+	myHomeButton.setAttribute("onclick", "location.href='/SnakeApp/'");
 
 	var header = document.getElementById("header");
 
 	header.appendChild(myHomeButton);
 
-	myHomeButton.addEventListener("click", goHomeFunction);
+	//myHomeButton.addEventListener("click", goHomeFunction);
+	
+	
 
 };
 
 var createSeeAllGamesButton = function() {
 
-	console.log("in see all games button");
+	
 
 	var myGamesButton = document.createElement("button");
 	myGamesButton.innerHTML = "Click To See Games";
@@ -332,27 +334,30 @@ var createSeeAllGamesButton = function() {
 
 };
 
-var goHomeFunction = function(e) {
+/*var goHomeFunction = function(e) {
+	
+	e.preventDefault(e);
+	
+	console.log("in goHomeFunction")
 
-	onClickStopFunction(e);
+	//onClickStopFunction(e);
 
-	onClickClearFunction(e);
+	//onClickClearFunction(e);
+	
+	clearTableFunction();
 
 	removeCountFunction();
 
 	clearFormsFunction();
 
 	clearButtonsFunction();
-
-	clearTableFunction();
-
+	
 	init();
+	
 
-};
+};*/
 
 var initMenuFunction = function() {
-
-	clearButtonsFunction(); // clear a start button
 
 	createHomeButton();
 
@@ -368,7 +373,18 @@ var initMenuFunction = function() {
 
 	createGetPlayerForm();
 	
-	createChoosePlayerForm();
+	
+	if (document.getElementById("myMenuButton")) {
+
+		var myButton = document.getElementById("myMenuButton");
+
+		console.log(myButton);
+
+		myButton.parentNode.removeChild(myButton);
+
+	}
+	
+	
 
 };
 
@@ -471,6 +487,8 @@ var clearFormsFunction = function() {
 
 var clearTableFunction = function() {
 
+	console.log("clearTableFunction");
+	
 	while (document.getElementById("tableList")) {
 
 		var myList = document.getElementById("tableList");
