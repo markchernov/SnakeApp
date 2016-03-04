@@ -12,6 +12,10 @@ var init = function(e) {
 
 	window.addEventListener("keydown", selectMove);
 	
+	
+	
+	
+	
 	createMenuButton();
 	
 	//onClickClearFunction(e);
@@ -114,32 +118,24 @@ var onClickStartFunction = function(e) {
      }
 	
 	
-	//clearCanvasFunction();
-	
-	clearTableFunction();
-	
+	restartGame(); 
 	
 	/*if(myGameArea) {                // if game area already exist clear it
-		
-		
+	
+	
 	myGameArea.clear();
 	
 	}*/
-	
-	/*if(context){
 		
-	clearCanvasFunction();
+	clearTableFunction();
 		
-		
-	}*/
-	
 	startInterval();
 
 	displayInterval();
 	
 	createGame(); // create temporary game object to update and persist later on
 	
-	startGame();  // start game from canvas.js
+	//startGame();  // start game from canvas.js
 
 };
 
@@ -317,14 +313,17 @@ var onClickClearFunction = function(e) {
 	console.log("in onClickClearFunction");
 
 	time = 0;
-	
+			
 	clearTableFunction();
 
 	removeCountFunction();
 
 	displayInterval();
 	
-	clearCanvasFunction();
+	
+	
+	
+	
 
 };
 
@@ -362,7 +361,7 @@ var createSeeAllGamesButton = function() {
 	
 
 	var myGamesButton = document.createElement("button");
-	myGamesButton.innerHTML = "Click To See Games";
+	myGamesButton.innerHTML = "Click To Top10 Games";
 	myGamesButton.setAttribute("id", "myGamesButton");
 
 	var header = document.getElementById("header");
@@ -407,6 +406,8 @@ var initMenuFunction = function() {
 	createClearButton();
 
 	createSeeAllGamesButton();
+	
+	createPutNewPlayerForm();
 
 	createGetGameForm();
 	
@@ -486,16 +487,6 @@ var createGetGameForm = function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
 var createGetPlayerForm = function() {
 
 	console.log("in create get player form");
@@ -524,6 +515,49 @@ var createGetPlayerForm = function() {
 	playerForm.submit.addEventListener("click", getOnePlayerFunction);	
 	
 };
+
+
+var createPutNewPlayerForm = function() {
+
+	console.log("in create get player form");
+
+	var playerForm = document.createElement("form");
+
+	playerForm.setAttribute("name", "newPlayerForm");
+	playerForm.setAttribute("id", "newPlayerForm");
+	var inputBox = document.createElement("input");
+
+	inputBox.setAttribute("name", "newPlayerForm");
+	inputBox.setAttribute("type", "text");
+	inputBox.setAttribute("placeholder", "Type Player Name");
+
+	var inputButton = document.createElement("input");
+
+	inputButton.setAttribute("name", "submit");
+	inputButton.setAttribute("type", "submit");
+	inputButton.setAttribute("value", "Create New Player     ");
+
+	var header = document.getElementById("header");
+	header.appendChild(playerForm);
+	playerForm.appendChild(inputBox);
+	playerForm.appendChild(inputButton);
+
+	playerForm.submit.addEventListener("click", putNewPlayerFunction);	
+	
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -561,6 +595,15 @@ var clearFormsFunction = function() {
 
 	}
 	
+	if (document.getElementById("newPlayerForm")) {
+
+		var myForm = document.getElementById("gamesByPlayerForm");
+
+		console.log(myForm);
+
+		myForm.parentNode.removeChild(myForm);
+
+	}
 	
 };
 

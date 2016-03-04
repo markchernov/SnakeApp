@@ -125,20 +125,21 @@ var xhrMethod = function(callback, url, method, object) {
 				for (var t = 0; t < response.length; t++) {
 
 					if (response[t].score) {
+						
+						
+						var localGame = new Game(response[t]);  // create an object of a game						
 
-						var name = response[t].player.name;
+						localGame.player = new Player(localGame.player); // create a new object of a player
+						
+						
+						delete response[t].id; // delete extra id assigned by Jackson
 
-						// var player =response[t].player;
+						delete response.toString; // delete toString property of a
+						// new Game object
 
-						response[t].player = name;
+						output.push(convertDate(localGame));
 
-						// response[t].player = new Player(player);
-
-						console.log(name);
-
-						output.push(convertDate(response[t]));
-
-						console.log(output);
+						console.log(localGame);
 
 					}
 
@@ -228,7 +229,7 @@ var convertDate = function(eventParam) {
 // constructors for JS objects
 function Game(obj) {
 
-	this.gameid = obj.id;
+	this.gameid = obj.gameid;
 	this.startdate = obj.startdate;
 	this.enddate = obj.enddate;
 	this.score = obj.score;
@@ -312,7 +313,25 @@ var putNewGameFunction = function(event) {
 };
 
 
+var putNewPlayerFunction = function(event)  {
+	
+	event.preventDefault(); // prevent redirect to another page
+	
+	var localName = document.newPlayerForm.newPlayerForm.value; // grab id from the text box
+		
+	var localPlayer = {playerid: 0, name: localName};
+	
+	player = new Player(localPlayer);
+	
+	console.log(player);
+			
+	var url = "rest/newplayer"; // path to my controller
 
+	xhrMethod(displayList, url, "PUT", player); // call HTTP request passing in callback
+	// method and url to
+	
+	
+};
 
 
 

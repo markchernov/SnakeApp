@@ -33,12 +33,29 @@ var myGameArea = {
 
 
 
-function startGame() {
+var startGame = function() {
 
 myGameArea.start();
 
 
 }
+
+var restartGame = function() {
+	
+	myGamePiece = new component(30, 30, "red", 10, 10);;
+
+	myFood = [];
+
+	myObstacles = [];
+
+	myObstacles2 = [];
+	
+
+	myGameArea.start();
+
+
+	};
+
 
 
 
